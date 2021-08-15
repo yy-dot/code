@@ -1,2 +1,11 @@
+
+
+
+
+macs2-callpeak
 ##macs2-version:2.1.2-broadPeak
-nohup macs2 callpeak -g mm -f BAMPE --broad --broad-cutoff 0.1 -t ${sample.bam} -c ${input.bam} -n 3.0macs2/${files} > 3.0macs2/logs/${files}.macs2.log &
+nohup macs2 callpeak -g mm -f BAMPE --broad --broad-cutoff 0.1 -t ${sample.bam} -c ${input.bam} -n ${lable.str} --outdir ${dir} > 3.0macs2/logs/${lable.str}.macs2.log &
+##macs2-version:2.1.2-narrowPeak
+nohup macs2 callpeak -g mm -f BAM -B -q 0.05 --keep-dup 1 -t ${sample.bam} -c ${input.bam} -n ${lable.str} --outdir ${dir} > 3.0macs2/logs/${lable.str}.macs2.log &
+
+deeptools
