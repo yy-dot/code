@@ -8,8 +8,28 @@ nohup macs2 callpeak -g mm -f BAMPE --broad --broad-cutoff 0.1 -t ${sample.bam} 
 ##macs2-version:2.1.2-narrowPeak
 nohup macs2 callpeak -g mm -f BAM -B -q 0.05 --keep-dup 1 -t ${sample.bam} -c ${input.bam} -n ${lable.str} --outdir ${dir} > 3.0macs2/logs/${lable.str}.macs2.log &
 
+
 bedtools
 ##bam2bedgraph
 nohup genomeCoverageBed -bg -ibam ${bam} -split > ${bedgraph} &
 ##bedgraph2bigwig
 nohup bedGraphToBigWig ${sorted.bedGraph} ${mm10.chrom.sizes} ${bw} &
+
+
+deeptools
+nohup multiBigwigSummary bins \
+	-b ${rep.bw}--smartLabels \
+	-o ${mltibw.npz} --outRawCounts ${mutibw.tab} >> ${mutibw.log} &
+
+nohup plotCorrelation \
+	-T ${title.str} --whatToPlot heatmap \
+	-min 0 -max 1 -c spearman -p heatmap \
+	--colorMap rainbow \
+	--corData ${mutibw.npz} \
+	--outFileCorMatrix ${tab} -o ${pdf} &
+
+nohup plotPCA \
+	--transpose \
+	-T ${title.str} --plotHeight 5 --plotWidth 10 \
+	-in ${mutibw.npz} \
+	--outFileNameData ${tab} -o ${pdf}  &
