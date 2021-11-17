@@ -1,4 +1,5 @@
 library(ggplot2)
+library(tidyr)
 
 barplot <- function(anno, xvalue, yvalue, fillvalue, ylable) {
   p <- ggplot(data=anno) +
@@ -17,4 +18,6 @@ barplot <- function(anno, xvalue, yvalue, fillvalue, ylable) {
   return(p)
 }
 
+
+anno <- gather(raw.data,sample,values,-annotation)
 p <- barplot(anno=anno, xvalue=anno$sample, yvalue=anno$values, fillvalue=anno$annotation, ylable='Ratio of observed to expected peaks(log2)')
