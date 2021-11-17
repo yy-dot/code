@@ -8,8 +8,6 @@ library(dendextend)
 
 tree.data <- read.delim("/home1/yyyu/Embryo/H3K9ac/k9ac_snp/4.0correlation/merge/h3k9ac_snp.mutibw.tab", sep = '\t', check.names = F)
 dim(tree.data)
-tree.data <- tree.data[,c(4:length(colnames(tree.data)))]
-tree.data<- tree.data[which(rowSums(tree.data)>0),]
 
 if(F){
   colnames(tree.data)<-c("e2C.M", "e2C.P", "l2C.M", "l2C.P", "4C.M", "4C.P", "8C.M","8C.P", "GV.M", "ICM.M", "ICM.P", "M2.M", "morula.M", "morula.P", "sperm.P", "TE.M", "TE.P", "zygote.M", "zygote.P")
@@ -32,7 +30,7 @@ if(F) {
   p1<-ggtree::rotate(p1,26)
   p1<-ggtree::rotate(p1,27)
   p1<-ggtree::rotate(p1,35)
-}
+}#调整树枝位置
 
 p2 <- ggtree(tree,aes(color=group), layout = "daylight")+scale_color_manual(values=c('red','black'))+
   geom_tiplab(angle=90,offset = 0)+
