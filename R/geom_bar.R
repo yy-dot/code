@@ -4,6 +4,7 @@ library(tidyr)
 barplot <- function(anno, xvalue, yvalue, fillvalue, ylable) {
   p <- ggplot(data=anno) +
     geom_bar(mapping=aes(x=xvalue, y=yvalue, fill=fillvalue), stat="identity",position=position_dodge(), width = 0.7) +
+    theme_classic() +
     theme(panel.background = element_rect(fill = NA),
           axis.line = element_line(colour = "black"),
           axis.text.x = element_text(angle = 45, vjust = 1),
