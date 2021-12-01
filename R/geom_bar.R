@@ -21,4 +21,5 @@ barplot <- function(anno, xvalue, yvalue, fillvalue, ylable) {
 
 
 anno <- gather(raw.data,sample,values,-annotation)
+colnames(anno) <-factor(colnames(anno),level=colnames(anno))
 p <- barplot(anno=anno, xvalue=anno$sample, yvalue=anno$values, fillvalue=anno$annotation, ylable='Ratio of observed to expected peaks(log2)')
