@@ -1,5 +1,0 @@
-ggplot(data = get(paste0(colnames(rna)[i],"_data")), mapping = aes(x = rna, y = k9ac)) +
-           geom_point(color='#0068B7',size=0.5)+theme_classic()+ 
-           stat_smooth(method = lm, se = FALSE,colour = "#EB6101",linetype="dashed",size=1) + 
-           stat_cor(method = "pearson", label.x = 1, label.y = 18) + 
-           labs(x='RNA[log2(fpkm+1)]',y='K9ac[log2(rpkm+1)]',title = colnames(rna)[i])

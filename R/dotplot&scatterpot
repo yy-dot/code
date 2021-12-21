@@ -1,0 +1,27 @@
+#dotplot
+ggplot(data = get(paste0(colnames(rna)[i],"_data")), mapping = aes(x = rna, y = k9ac)) +
+           geom_point(color='#0068B7',size=0.5)+theme_classic()+ 
+           stat_smooth(method = lm, se = FALSE,colour = "#EB6101",linetype="dashed",size=1) + 
+           stat_cor(method = "pearson", label.x = 1, label.y = 18) + 
+           labs(x='RNA[log2(fpkm+1)]',y='K9ac[log2(rpkm+1)]',title = colnames(rna)[i])
+
+ 
+ 
+ #scatterplot
+pdf('compare_k9ac1kb_dotplot.pdf',width = 4,height = 4)
+for (i in 1:ncol(k9ac_bin.rowdata)){
+    phase.data=get(paste0(colnames(k9ac_bin.rowdata)[i],"_data"))
+    lu=round(nrow(phase.data[phase.data$k9ac<0 & phase.data$k9me3>0,])/nrow(phase.data),4)
+    ru=round(nrow(phase.data[phase.data$k9ac>0 & phase.data$k9me3>0,])/nrow(phase.data),4)
+    ld=round(nrow(phase.data[phase.data$k9ac<0 & phase.data$k9me3<0,])/nrow(phase.data),4)
+    rd=round(nrow(phase.data[phase.data$k9ac>0 & phase.data$k9me3<0,])/nrow(phase.data),4)
+    smoothScatter(phase.data[,c("k9ac","k9me3")],xlim=c(-3.5,4.5), ylim=c(-4.5,5),xlab='K9ac(rpkm)', ylab='K9me3(rpkm)',nbin = 512,
+                  colramp = colorRampPalette(c("white", "#0068B7", "orange", "red")),nrpoints = 100,lwd=1)+
+    abline(h=0,v=0,lty="dashed",)+title(main=colnames(k9ac_bin.rowdata)[i])
+    text(x=-3,y=4.5,labels = paste(lu*100, "%", sep=''),cex =0.8)+
+    text(x=4,y=4.5,labels = paste(ru*100, "%", sep=''),cex =0.8)+
+    text(x=-3,y=-4,labels = paste(ld*100, "%", sep=''),cex =0.8)+
+    text(x=4,y=-4,labels = paste(rd*100, "%", sep=''),cex =0.8)
+    }
+dev.off()
+ 
