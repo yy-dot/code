@@ -9,4 +9,4 @@ ggplot(data=phase, mapping = aes(x = motification, y = value,fill = factor(class
                  axis.line.x = element_blank(),
                  axis.ticks.x = element_blank()) +
            labs(y='log2(H3K9ac RPKM at promoter + 1)') +
-           labs(title = colnames(k9ac_bin.rowdata)[i])+ scale_color_manual(values = c('#ADD8E6','#0000FF'))
+           labs(title = colnames(k9ac_bin.rowdata)[i])+ scale_fill_manual(values = c('#ADD8E6','#0000FF'))
