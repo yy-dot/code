@@ -6,7 +6,7 @@ library(ape)
 library(ggtree)
 library(dendextend)
 
-tree.data <- read.delim("/home1/yyyu/Embryo/H3K9ac/k9ac_snp/4.0correlation/merge/h3k9ac_snp.mutibw.tab", sep = '\t', check.names = F)
+tree.data <- read.delim("/home1/yyyu/Embryo/H3K9ac/k9ac_snp/4.0correlation/merge/h3k9ac_snp.multibw.tab", sep = '\t', check.names = F)
 dim(tree.data)
 
 if(F){
