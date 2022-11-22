@@ -1,3 +1,8 @@
+#需要的包
+library(pheatmap)
+library(factoextra)
+library(RColorBrewer)
+
 #kmean聚类
 if(F){
   data.scale=rescale_data(data,-2.5,2.5,2)
