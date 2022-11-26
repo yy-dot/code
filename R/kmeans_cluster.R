@@ -2,6 +2,11 @@
 library(pheatmap)
 library(factoextra)
 library(RColorBrewer)
+library(dplyr)
+
+#选取方差较大的行
+data$cv=apply(data, 1, function(y){sd(y)/mean(y)})
+data=data[data$cv>0.25,] %>% dplyr::select(-cv)
 
 #kmean聚类
 if(F){
