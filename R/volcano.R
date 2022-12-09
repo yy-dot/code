@@ -4,7 +4,7 @@ resdata$threshold = factor(ifelse(resdata$padj < 0.05 & abs(resdata$log2FoldChan
 
 vol=ggplot(resdata,aes(x=log2FoldChange,y=-log10(padj),color=threshold))+
   geom_point()+ 
-  scale_color_manual(values=c("#CF0141","#0068B7","#7B7C7D"))+#确定点的颜色#FCD575
+  scale_color_manual(values=c("#0068B7","#7B7C7D","#CF0141"))+#确定点的颜色#FCD575
   geom_text_repel(
     data = resdata[resdata$padj<0.01 & abs(resdata$log2FoldChange)>2,],
     aes(label = gene_name),
