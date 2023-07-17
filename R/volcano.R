@@ -14,8 +14,6 @@ vol=ggplot(resdata,aes(x=log2FoldChange,y=-log10(padj),color=threshold))+
   theme(
     legend.title = element_blank(),#不显示图例标题
     plot.title = element_text(hjust = 0.5))+
-  labs(title="siALKBH5 vs siCtrl")+
-  ylab('-log10 p-adj')+#修改y轴名称
-  xlab('log2 FoldChange(Gene Expression)')+#修改x轴名称
+  labs(title="siALKBH5 vs siCtrl",x='log2 FoldChange(Gene Expression)',y='-log10 p-adj')+
   geom_vline(xintercept=c(-1,1),lty=3,col="black",lwd=0.5) +#添加横线|FoldChange|>2
   geom_hline(yintercept = -log10(0.05),lty=3,col="black",lwd=0.5)#添加竖线padj<0.05
