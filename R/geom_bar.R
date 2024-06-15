@@ -23,3 +23,18 @@ barplot <- function(anno, xvalue, yvalue, fillvalue, ylable) {
 anno <- gather(raw.data,sample,values,-annotation)
 anno$sample <-factor(anno$sample,level=anno$sample)
 p <- barplot(anno=anno, xvalue=anno$sample, yvalue=anno$values, fillvalue=anno$annotation, ylable='Ratio of observed to expected peaks(log2)')
+
+
+
+
+#需要使bar图y轴的最小值大于0
+#可以使用geom_col和coord_cartesian强制让ymin=特定值,geom_col=geom_bar(stat = "identity")
+ggplot(data = qc,mapping = aes(x = sample, y = `5mCpG/all_CpG(%)`)) +
+  geom_col(fill='#71A0C6',width =0.7)+
+  coord_cartesian(ylim = c(73,76))+
+  theme_bw()+theme(panel.grid.major = element_blank(),
+                   panel.grid.minor = element_blank(),
+                   panel.border = element_blank(),
+                   axis.line = element_line(colour = "black"),
+                   legend.key.size=unit(10, "pt"),
+                   axis.text.x = element_text(angle = 90, hjust = 1))
